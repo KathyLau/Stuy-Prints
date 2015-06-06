@@ -57,6 +57,14 @@ def match():
        for line in f:
          if line[0]==user:
            f.remove(line)
+       for i,x in enumerate(f):
+          f[i]='|'.join(x)
+       f='\n'.join(x)
+      File=open('file/pending.txt','w')
+      File.write(f)
+      File.close()
+      
+      
                 
    
      
