@@ -21,7 +21,7 @@ def dataInput():
 def makeUserPazzDict():#Reused this
     userPazzs=open('files/users.txt','r').read().strip().split('\n')
     for i in range(len(userPazzs)):
-        userPazzs[i]=userPazzs[i].split(',')
+        userPazzs[i]=userPazzs[i].split('|')
     d={}
     for i in userPazzs:
         d[i[0]]=i[1]
@@ -56,6 +56,7 @@ def PassorNah():
 topHtml='''<!DOCTYPE HTML><html>
 <head>
    <title>sign up</title>
+   <link rel="icon" href="http://stuy.enschool.org/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>'''
@@ -63,6 +64,7 @@ topHtml='''<!DOCTYPE HTML><html>
 bottomHtml='''</body>
 </html>
 '''
+
         
 def makePage():
     ans=topHtml
