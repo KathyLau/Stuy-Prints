@@ -32,7 +32,7 @@ def checkIt():
 def dictOfUsers():
     userPazzs=open('files/admins.txt','r').read().strip().split('\n')
     for i in range(len(userPazzs)):
-        userPazzs[i]=userPazzs[i].split(',')
+        userPazzs[i]=userPazzs[i].split('|')
     d={}
     for i in userPazzs:
         d[i[0]]=i[1]
@@ -50,6 +50,7 @@ def checkAll():
 topHtml='''<!DOCTYPE HTML><html>
 <head>
    <title>log in</title>
+   <link rel="icon" href="http://stuy.enschool.org/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" type="text/css" href="style.css"> 
 </head>
 <body>'''
@@ -67,7 +68,7 @@ def loggedInSpecial():
            logOut(i[0])
 
 def writeCSVline(L):
-    return ",".join(L) + '\n'
+    return "|".join(L) + '\n'
 
 def logIn():
     loggedInSpecial()
@@ -80,7 +81,7 @@ def readCSV(csv):
     loog=text.split('\n')
     log=[]
     for i in loog:
-        log.append(i.split(','))
+        log.append(i.split('|'))
     return log
 
 
@@ -98,7 +99,7 @@ def logOut(theUser):
             log.remove(i)
     newLoggedin=open('files/loggedin.txt','w')
     for i in log:
-        newLoggedin.write(",".join(i) +"\n")
+        newLoggedin.write("|".join(i) +"\n")
     newLoggedin.close()
 
 def makePage():
@@ -107,8 +108,8 @@ def makePage():
         logOut(aduser)
     if checkAll():
         logIn()
-        retS+= 'Congratulations ' + aduser + '! You have succesfully logged in!<br>Click <a href="./uploaded">here</a> to view the uploaded files.\
-        <br><br><br>Log out <a href="admlogIn.py?user=''' + aduser + '&id=' + id + '''&logOut=True">here</a>'''
+        retS+= 'Congratulations ' + aduser + '! You have succesfully logged in!<br>Click <a href="./uploaded/index2.py?aduser='+aduser+'&id='+id +'">here</a> to view the uploaded files.\
+        <br><br><br>Log out <a href="admlogIn.py?aduser=''' + aduser + '&id=' + id + '''&logOut=True">here</a>'''
     else:
         if aduser not in userPazzs:
             retS+='<b>STUY PRINTS</b>'
@@ -121,11 +122,10 @@ def makePage():
         <form method="POST" action="admlogIn.py">
        <tr><td> Username:</td><td> <input type="text" name="aduser"></td></tr>
        <tr><td> Password:</td><td> <input type="password" name="pazz"> </td></tr>
+       
        <tr><td> <input type="submit"></tr></td>
         </form>
         </table>
         Just a normal user? Login <a href="logIn.py">here</a>! '''
     return retS+bottomHtml
-
-
 print makePage()
