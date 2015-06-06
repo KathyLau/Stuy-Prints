@@ -1,0 +1,2 @@
+user|password|id
+slau7@stuy.edu|aaba8e7d5920a4503a240f4ca0c3a69f|9422
