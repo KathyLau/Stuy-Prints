@@ -18,8 +18,8 @@ if "id" in keys:
 topHtml='''<!DOCTYPE HTML><html>
 <head>
    <title>Forum</title>
+   <link rel="icon" href="http://stuy.enschool.org/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" type="text/css" href="style.css"> 
-   
 </head>
 <body>'''
 
@@ -33,7 +33,7 @@ def readCSV(csv):
     log=text.split('\n')
     logList=[]
     for a in log:
-        logList.append(a.split(','))
+        logList.append(a.split('|'))
     return logList
 
 def loggedIn():
@@ -63,25 +63,34 @@ def makePage():
             '''
         else:
             retHTML+=  '''
+<div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
             <div id="bar">
             <ul class="sidebar">
-                <li><a class="bar_element" href="forum.py?user=''' + user +'&id=' + id + '''&logIn=True">Home Page</a> </li>
-            </ul></p>
+                <li><a class="bar_element" href="forum.py?user=''' + user +'&id=' + id + '''&logIn=True">Home</a> </li>
+                <br><li><a class="bar_element" href="next.py?user=''' + user +'&id=' + id + '''&logIn=True">Rules</a> </li>
+                <br><li><a class="bar_element" href="next.py?user=''' + user +'&id=' + id + '''&logIn=True">Questions?</a> </li>
+                <br><li><a class="bar_element" href="logIn.py?user=''' + user + '&id=' + id + '''&logOut=True">Log Out</a> </li>
+                           </ul></p>
             </div>
-<div id="r">
+<div id="par">
 <h2>welcome to our forum</h2>
+<div id="r">
 <h3> Come back later</h3>
-<div id="logout"><a href="logIn.py?user=a123&id=35283893675859&logOut=True">
-            Click here to log out.</a></div></div>
-            '''
- 
-            #retHTML+='''
-            #Log out <a href="logIn.py?user=''' + user + '&id=' + id + '''&logOut=True">here</a>.
-        #'''
+
+
+
+'''
+#<h2>welcome to our forum</h2>
+#<h3> Come back later</h3>
+#<div id="logout"><a href="logIn.py?user=a123&id=35283893675859&logOut=True">
+            #Click here to log out.</a></div></div></div>
+            #'''
     else:
         retHTML+='<h2>Page not found.</h2>'
     return retHTML+bottomHtml
 
 
 print makePage()
+
+
 
