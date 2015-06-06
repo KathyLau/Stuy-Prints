@@ -18,6 +18,7 @@ if "id" in keys:
 topHtml='''<!DOCTYPE HTML><html>
 <head>
    <title>Main Page</title>
+   <link rel="icon" href="http://stuy.enschool.org/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" type="text/css" href="style.css"> 
 </head>
 <body>'''
@@ -32,7 +33,7 @@ def readCSV(csv):
     log=text.split('\n')
     logList=[]
     for a in log:
-        logList.append(a.split(','))
+        logList.append(a.split('|'))
     return logList
 
 def loggedIn():
@@ -61,7 +62,11 @@ def makePage():
                             to relogin.</h2>
             '''
         else:
-            retHTML+=  '''<h1>''' + user.capitalize() + ''' , What would you like to print today?</h1>
+            retHTML+='''
+<div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
+<div id="par2">
+'''
+            retHTML+=  user.capitalize() + ''' , What would you like to print today?</h1>
             <form method="post" 
                enctype="multipart/form-data"
                onsubmit="return check();"
@@ -73,7 +78,7 @@ def makePage():
                   accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
                   text/plain, application/pdf">
                </p>
-           <p>Period# 
+           <p>Period # you're stopping by
        <select name="pd" size="1">
   <option selected>03</option>
   <option>04</option>
@@ -83,22 +88,19 @@ def makePage():
   <option>08</option>
   <option>09</option>
   <option>10</option>
+</select><br><br>
+How would you like your paper organized?<br>
+<input type="radio" name="clip_type" value="None"checked>None<br>
+<input type="radio" name="clip_type" value="Stapled">Stapled<br>
+<input type="radio" name="clip_type" value="Papercliped">Papercliped<br>
+<br> No. of copies?
+<select name="copy" size="1">
+  <option selected>1</option>
+  <option>2</option>
+  <option>3</option>
 </select>
-Floor# 
-       <select name="fl" size="1">
-  <option selected>01</option>
-  <option>02</option>
-  <option>03</option>
-  <option>04</option>
-  <option>05</option>
-  <option>06</option>
-  <option>07</option>
-  <option>08</option>
-  <option>09</option>
-  <option>10</option>
-</select>
-Room#
-<input type="text" name="rm">
+
+
 
 </p>
 
@@ -112,7 +114,7 @@ Room#
             <input type="submit" value="Send">
             </form>
 <br>
-Future forum<a href="post.py?user='''%(user,id) + user + '&id=' + id + '''&logIn=True">here</a>
+Future forum<a href="forum.py?user='''%(user,id) + user + '&id=' + id + '''&logIn=True">here</a>
 
 <br>
             Log out <a href="logIn.py?user=''' + user + '&id=' + id + '''&logOut=True">here</a>.
@@ -138,6 +140,7 @@ if now > today5pm and now < today7pm:
     commands.getoutput("rm uploaded/08/*")
     commands.getoutput("rm uploaded/09/*")
     commands.getoutput("rm uploaded/10/*")
-    open('files/uploaded.txt','w').write('')
+    open('files/uploaded.txt','w').write('user|file name|pd|clip type|copies\n')
 #while True: 
 #  autoRM()
+
