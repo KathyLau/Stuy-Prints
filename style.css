@@ -1,0 +1,41 @@
+body {
+    background:#55BCFF;
+}
+
+table {
+    background:#29A2C7;
+    border: 3px solid #ffffff;
+    padding: 20px;
+    width: 200px;
+    height: 150px; 
+}
+#bar {
+    float: left;
+    text-align:center;
+}
+#r{
+position: relative;
+left: 200px;
+}
+a.bar_element:link, a.bar_element:visited {
+    display: block;
+    color: #FFFFFF;
+    background-color: #FA6D4D;
+    width: 190px;
+    text-align: center;
+    padding: 3px;
+    text-decoration: none;
+}
+
+a.bar_element:hover {
+    background-color: #FFAE9C;
+ 
+}
+
+ul.sidebar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
