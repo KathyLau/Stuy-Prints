@@ -31,7 +31,7 @@ def checkIt():
 def dictOfUsers():
     userPazzs=open('files/users.txt','r').read().strip().split('\n')
     for i in range(len(userPazzs)):
-        userPazzs[i]=userPazzs[i].split(',')
+        userPazzs[i]=userPazzs[i].split('|')
     d={}
     for i in userPazzs:
         d[i[0]]=i[1]
@@ -49,9 +49,11 @@ def checkAll():
 topHtml='''<!DOCTYPE HTML><html>
 <head>
    <title>log in</title>
+   <link rel="icon" href="http://stuy.enschool.org/favicon.ico" type="image/x-icon">
    <link rel="stylesheet" type="text/css" href="style.css"> 
-</head>
-<body>'''
+
+
+'''
 
 
 bottomHtml='''
@@ -66,7 +68,7 @@ def loggedInSpecial():
            logOut(i[0])
 
 def writeCSVline(L):
-    return ",".join(L) + '\n'
+    return "|".join(L) + '\n'
 
 def logIn():
     loggedInSpecial()
@@ -79,7 +81,7 @@ def readCSV(csv):
     loog=text.split('\n')
     log=[]
     for i in loog:
-        log.append(i.split(','))
+        log.append(i.split('|'))
     return log
 
 
@@ -97,7 +99,7 @@ def logOut(theUser):
             log.remove(i)
     newLoggedin=open('files/loggedin.txt','w')
     for i in log:
-        newLoggedin.write(",".join(i) +"\n")
+        newLoggedin.write("|".join(i) +"\n")
     newLoggedin.close()
 
 def makePage():
@@ -106,24 +108,43 @@ def makePage():
         logOut(user)
     if checkAll():
         logIn()
-        retS+= 'Congratulations ' + user + '! You have succesfully logged in!<br>Click <a href="main.py?user=' + user + '&id=' + id + '">here</a> to begin using our page.<br>Click <a href="forum.py?user=' + user + '&id=' + id + '"here</a> to view our forum.'
+        retS+='''
+
+<div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
+
+
+'''
+        retS+='<div id="par">'
+        retS+= 'Congratulations ' + user + '! You have succesfully logged in!<br><br>Click <a href="main.py?user=' + user + '&id=' + id + '">here</a> to begin using our page.<br><br>Click <a href="forum.py?user=' + user + '&id=' + id + '"here</a> to view our forum.</div></div>'
+        retS+='</div>'
     else:
         if user not in userPazzs:
-            retS+='<b>STUY PRINTS</b>'
+            retS+=''
         elif logOuts:
             retS+='You have successfully logged out.'
         elif userPazzs[user]!=pazz:
-            retS+='Incorrect Username/Password. Try again:'
-        retS+= '''<br>
-        <table><tr><th>Log In!</th></tr>
-        <form method="POST" action="logIn.py">
-       <tr><td> Username:</td><td> <input type="text" name="user"></td></tr>
-       <tr><td> Password:</td><td> <input type="password" name="pazz"> </td></tr>
-       <tr><td> <input type="submit"></tr></td>
-        </form>
-        </table>
-        Don\'t have an account? Sign up <a href="signUp.py">here</a>! It's free.'''
+            retS+='<center>Incorrect Username/Password. Try again:</center>'
+        retS+= '''
+
+<body>
+
+<div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
+
+
+
+
+        <div id="table">
+        <form method="POST" action="logIn.py"><table>
+       <tr><th><font size="6px">Log In</font></th></tr>
+       <tr><td> <input type="text" name="user" placeholder="Username" style="height: 35px; width: 260px;" required></td></tr>
+       <tr><td> <input type="password" name="pazz" placeholder="Password" style="height: 35px; width: 260px;" required></td></tr>
+        <tr><td><input type="submit"></div></center></table></form><br><br><br><br><br><br><br><br>
+       <center><h3>Don\'t have an account? Sign up <a href="./signUp.py">here</a>! It's free.</h3></center>
+        
+       
+</div>'''
     return retS+bottomHtml
+
 
 
 print makePage()
