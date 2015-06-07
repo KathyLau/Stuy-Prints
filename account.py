@@ -83,7 +83,7 @@ def makePage():
 '''         
           for w in readCSV('files/uploaded.txt'):
               if w[0]==user:
-                retHTML+='<option>'+w[2]+'/'+w[1]+'</option>'
+                retHTML+='<option>uploaded/'+w[2]+'/'+w[1]+'</option>'
           retHTML+='''</select><br><br>
           </form>
 
