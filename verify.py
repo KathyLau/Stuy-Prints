@@ -59,7 +59,9 @@ def match():
            f.remove(line)
        for i,x in enumerate(f):
           f[i]='|'.join(x)
-       f='\n'.join(f)
+       f='\n'.join
+       if len(f)==16:
+          f+='\n'
       File=open('file/pending.txt','w')
       File.write(f)
       File.close()
