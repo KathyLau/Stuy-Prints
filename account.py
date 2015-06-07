@@ -79,8 +79,8 @@ def makePage():
           retHTML+='''
 <form method="POST" action="account.py?user='''+user+'&id='+id+'''"'>
 <div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
-<div id="par2"><select name="file" class="styled" onChange="document.location = this.value" value="GO"><option selected>None</option>
-'''         
+<div id="par2"><select name="file" class="styled" onChange="document.location = this.value" value="GO"><option selected value="account.py?user=%s&id=%s">None</option>
+'''%(user,id)         
           for w in readCSV('files/uploaded.txt'):
               if w[0]==user:
                 retHTML+='<option>uploaded/'+w[2]+'/'+w[1]+'</option>'
