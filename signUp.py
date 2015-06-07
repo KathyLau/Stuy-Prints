@@ -110,7 +110,7 @@ def email():
   TEXT="Your user name is " + user + '.' + "Your verification id is " + i
 
   gmail_sender="imobilep501@gmail.com"
-  gmail_passwd='monkeylives@yauma731'
+  gmail_passwd=''
 
   server= smtplib.SMTP('smtp.gmail.com',587)
   server.ehlo()
