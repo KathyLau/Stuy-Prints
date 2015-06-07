@@ -57,10 +57,18 @@ def printPage():
                 </form>
            '''   
     if posted:
-      postNum=1
+      postNum=int(readCSV('files/posts.txt')[0][0])   
       f=open('files/posts.txt','a')
       f.write(user+'|'+post+'|'+n+ '|'+str(postNum)+'\n')
       postNum+=1
+      f.close()
+      f=open('files/posts.txt')
+      data=f.read()
+      f.close()
+      pos=data.find('\n')
+      data=str(postNum)+data[pos:]
+      f=open('files/posts.txt','w')
+      f.write(data)
       f.close()
   else:
     ans= 'Log in to view'
