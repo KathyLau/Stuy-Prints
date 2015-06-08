@@ -45,7 +45,7 @@ def editPass():
     DATA=open('files/users.txt','r')
     File=DATA.read()
     DATA.close()
-    index=File.find(user+",")+len(user)+1
+    index=File.find(user+"|")+len(user)+1
     File=File[:index]+Npass+File[index+len(Opass):]
     FileW=open('files/users.txt','w')
     FileW.write(File)    
