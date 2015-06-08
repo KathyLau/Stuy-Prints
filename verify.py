@@ -62,9 +62,10 @@ def match():
        f='\n'.join
        if len(f)==16:
           f+='\n'
-      File=open('file/pending.txt','w')
-      File.write(f)
-      File.close()
+       File=open('file/pending.txt','w')
+       File.write(f)
+       File.close()
+       break
       
       
                 
