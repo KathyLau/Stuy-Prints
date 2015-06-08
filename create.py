@@ -68,13 +68,13 @@ def create_note():
 </script><body><center>
 <div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
 <h1>Remember to save your notes!</h1>
-<form method="post" action="save.py?user='''+user+'&id='+id+'''"'>
+<form method="post" action="save.py?user="""+user+'&id='+id+'''">
     <input type="text" name="fname" size="100" placeholder="Title." required>
     <textarea name="body" style="width:100%"></textarea>
     <button type="submit" formaction="main.py" onclick="return confirm('Exit w/o saving?')">Go back</button>
     <input type="submit" value="Save note">
 </form></center></body>
-</html>"""
+</html>'''
     return topHtml+form
 
 if loggedIn():
