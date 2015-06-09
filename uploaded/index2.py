@@ -124,7 +124,7 @@ def makePage():
 
 def motif():
   tempdata=open("../files/tempdata.txt")
-  data=tempdata.read()
+  data='\n'+tempdata.read()
   tempdata.close()
   tempdata=open("../files/tempdata.txt","w")
   tempdata.write("")
@@ -133,8 +133,10 @@ def motif():
   for key in keys:
     if 'var' in key and form[key].value=='Yup':
         pos=data.find(key)
-        beg=data[:pos-1].strip('\n')
-        notif.write(beg+'\n')
+        checkpoint=data[:pos-1][::-1]
+        index=checkpoint.find('\n')
+        info=checkpoint[:index][::-1]
+        notif.write(info+'\n')
   notif.close()
 
 print makePage()
