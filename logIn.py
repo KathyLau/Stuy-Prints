@@ -110,12 +110,14 @@ def makePage():
         logIn()
         retS+='''
 
-<div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
+<div id="header"><h1><font face="Courier"><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></font></h1></div>
 
 
 '''
         retS+='<div id="par">'
-        retS+= 'Congratulations ' + user + '! You have succesfully logged in!<br><br>Click <a href="main.py?user=' + user + '&id=' + id + '">here</a> to begin using our page.<br><br>Click <a href="forum.py?user=' + user + '&id=' + id + '"here</a> to view our forum.</div></div>'
+        retS+= 'Congratulations ' + user + '! You have succesfully logged in!<br><br>Click <a href="forum.py?user=' + user + '&id=' + id + '">\
+                here</a> to begin using our page.<br>'
+        retS+=notify()
         retS+='</div>'
     else:
         if user not in userPazzs:
@@ -138,12 +140,41 @@ def makePage():
        <tr><th><font size="6px">Log In</font></th></tr>
        <tr><td> <input type="text" name="user" placeholder="Username" style="height: 35px; width: 260px;" required></td></tr>
        <tr><td> <input type="password" name="pazz" placeholder="Password" style="height: 35px; width: 260px;" required></td></tr>
-        <tr><td><input type="submit"></div></center></table></form><br><br><br><br><br><br><br><br>
+        <tr><td><input type="submit"></div></center></table></form><br><br><br><br><br><br>
        <center><h3>Don\'t have an account? Sign up <a href="./signUp.py">here</a>! It's free.</h3></center>
+       <center><h3>Change your password <a href="./passChange.py">here</a></h3></center>
         
        
 </div>'''
     return retS+bottomHtml
+
+
+
+def notify():
+  files=[]
+  notifs=readCSV("files/notif.txt")
+  if len(notifs)!=1 and notifs[0][0]!='':
+    for line in notifs:
+        if line[0]==user:
+            files.append(line[1])
+            notifs.remove(line)
+    for pos in range(len(notifs)):
+        notifs[pos]='|'.join(notifs[pos])
+    notifs='\n'.join(notifs)
+    rwrite=open("files/notif.txt","w")
+    rwrite.write(notifs)
+    rwrite.close()
+  if len(files)==0:
+    fmessage=''
+  if len(files)==1:
+    fmessage="%s has been printed~"%(files[0])
+  if len(files)>1:
+    fill=files[0]+" "
+    for pos in range(1,len(files)):
+        fill+=",%s "%(files[pos])
+    fmessage="%s have been printed~"%(fill)
+  return fmessage
+
 
 
 
