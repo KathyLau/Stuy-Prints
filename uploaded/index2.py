@@ -89,58 +89,29 @@ def makePage():
             '''
         if 'pd' in keys:
           retHTML+='<form method="POST" action="index2.py?&aduser='+aduser+'&id=' +id+'">'
-        if 'pd' in keys and pd=='03':
+        if 'pd' in keys:
             retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='03':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="03/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='04':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='04':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="04/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='05':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='05':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="05/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='06':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='06':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="06/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='07':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='07':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="07/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='08':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='08':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="08/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='09':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='09':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="09/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
+            NL=[]
+            n=0
+            files=readCSV("../files/uploaded.txt")[1:]
+            for fil in files:
+              n+=1
+              if fil[2]==pd:
+                fil.append("var%s"%(n))
+                NL.append(fil)
+                retHTML+='<tr><td>%s</td><td><a href="%s/%s">%s</a><td>%s</td><td>%s</td><td><input type="checkbox" name="var%s" value="Yup"></td></tr>'%(fil[0],pd,fil[1],fil[1],fil[2],fil[3],n)
+            for pos in range(len(NL)):
+              NL[pos]='|'.join(NL[pos])
+            NL='\n'.join(NL)
+            tempdata=open("../files/tempdata.txt","w")
+            tempdata.write(NL)
+            tempdata.close()
 
-            retHTML+="</table>"
-        elif 'pd' in keys and pd=='10':
-            retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
-            for i in readCSV('../files/uploaded.txt')[1:]:
-              if i[2]=='10':
-                retHTML+='<tr><td>'+i[0]+ '</td><td>'+'<a href="10/' + i[1] + '">'+i[1]+'</a>' + "<td>"+i[2]+"</td>" +"<td>"+i[3]+"</td><td><input type='checkbox' name='ready' value='Yup'></td></tr>"
             retHTML+="</table>"
         if 'pd' in keys:
-          retHTML+='<center><input type="submit" name="fred" value="Submit."></center>'
-
+          retHTML+='<center><input type="submit" name="notify" value="Submit."></center>'
+        if "notify" in keys:
+          motif()
         else:
             retHTML+= filesss
             retHTML+='''<br>
@@ -151,9 +122,22 @@ def makePage():
         retHTML+='<h2>Page not found.</h2>'
     return retHTML+'</form>'+bottomHtml
 
-
-print makePage()
-
+def motif():
+  tempdata=open("../files/tempdata.txt")
+  data=tempdata.read()
+  tempdata.close()
+  tempdata=open("../files/tempdata.txt","w")
+  tempdata.write("")
+  tempdata.close()
+  notif=open("../files/notif.txt","a")
+  for key in keys:
+    if 'var' in key and form[key].value=='Yup':
+        pos=data.find(key)
+        checkpoint=data[:pos-1][::-1]
+        index=checkpoint.find('n\\')
+        info=checkpoint[:index][::-1]
+        notif.write(info+'\n')
+  notif.close()
 
 
 print makePage()
