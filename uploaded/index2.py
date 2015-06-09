@@ -135,7 +135,9 @@ def motif():
         pos=data.find(key)
         checkpoint=data[:pos-1][::-1]
         index=checkpoint.find('\n')
-        info=checkpoint[:index][::-1]
+        if index!=-1:
+            info=checkpoint[:index][::-1]
+        else: info=checkpoint[::-1]
         notif.write(info+'\n')
   notif.close()
 
