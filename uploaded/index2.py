@@ -133,11 +133,8 @@ def motif():
   for key in keys:
     if 'var' in key and form[key].value=='Yup':
         pos=data.find(key)
-        checkpoint=data[:pos-1][::-1]
-        index=checkpoint.find('n\\')
-        info=checkpoint[:index][::-1]
-        notif.write(info+'\n')
+        beg=data[:pos-1].strip('\n')
+        notif.write(beg+'\n')
   notif.close()
-
 
 print makePage()
