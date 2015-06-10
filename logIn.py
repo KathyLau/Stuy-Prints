@@ -153,7 +153,7 @@ def makePage():
 def notify():
   files=[]
   notifs=readCSV("files/notif.txt")
-  if len(notifs)!=1 and notifs[0][0]!='':
+  if len(notifs)!=1 or notifs[0][0]!='':
     for line in notifs[:]:
         if line[0]==user:
             files.append(line[1])
