@@ -154,7 +154,7 @@ def notify():
   files=[]
   notifs=readCSV("files/notif.txt")
   if len(notifs)!=1 and notifs[0][0]!='':
-    for line in notifs:
+    for line in notifs[:]:
         if line[0]==user:
             files.append(line[1])
             notifs.remove(line)
@@ -165,7 +165,7 @@ def notify():
     else: notifs=notifs[0]+'\n'
     rwrite=open("files/notif.txt","w")
     rwrite.write(notifs)
-    rwrite.close()
+    rwrite.close() 
   if len(files)==0:
     fmessage=''
   if len(files)==1:
