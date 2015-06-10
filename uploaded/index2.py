@@ -123,6 +123,7 @@ def makePage():
     return retHTML+'</form>'+bottomHtml
 
 def motif():
+  L=[]
   tempdata=open("../files/tempdata.txt")
   data='\n'+tempdata.read()
   tempdata.close()
@@ -139,6 +140,15 @@ def motif():
             info=checkpoint[:index][::-1]
         else: info=checkpoint[::-1]
         notif.write(info+'\n')
+        L.append(info.split('|')[1])
   notif.close()
+  f2=readCSV("../files/uploaded.txt")
+  for line in f2:
+    if line[1] in L:
+      f2.remove(line)
+  File=open("../files/uploaded.txt","w")
+  for line in f2:
+    File.write("|".join(line)+"\n")
+  File.close()
 
 print makePage()
