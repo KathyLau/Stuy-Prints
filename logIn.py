@@ -161,7 +161,7 @@ def notify():
     for pos in range(len(notifs)):
         notifs[pos]='|'.join(notifs[pos])
     if len(notifs)!=1:
-        notifs='\n'.join(notifs)
+        notifs='\n'.join(notifs)+'\n'
     else: notifs=notifs[0]+'\n'
     rwrite=open("files/notif.txt","w")
     rwrite.write(notifs)
