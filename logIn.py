@@ -66,6 +66,10 @@ def loggedInSpecial():
     for i in log:
         if i[0]==user:
            logOut(i[0])
+           new2=open('files/loggedin.txt','a')
+           new2.write("|".join([user,id,ip,str(logOutTime)]) + '\n')    
+           new2.close()
+      
 
 def writeCSVline(L):
     return "|".join(L) + '\n'
