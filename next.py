@@ -87,6 +87,7 @@ tinymce.init({
                 </form>
            '''   
     if posted:
+       pre=int(readCSV('files/posts.txt')[0][0])+1
       f=open('files/posts.txt','a')
       f.write(user+'|'+post+'|'+n+ '|'+str(postNum)+'\n')
       f.close()
@@ -94,7 +95,7 @@ tinymce.init({
       data=f.read()
       f.close()
       pos=data.find('\n')
-      data=str(postNum)+data[pos:]
+      data=str(pre)+data[pos:]
       f=open('files/posts.txt','w')
       f.write(data)
       f.close()
@@ -171,15 +172,6 @@ def printPageCont():
          blacklist.append(a[3]) 
        else: pass
    except: print ''
-
-
-#def printPageCont():
-#  try:
-#    for w in p[2:]:
-#      a=w.split('|')
-#      print '<div id="par3"><h3>'+a[1]+'</h3><BR>' + a[0]+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+a[2]+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'\
-#           +'View the whole post<a href="next.py?user='+user+'&id='+id+'&postNum='+a[3]+'&logIn=True">here</a><BR>'+'<HR></div>' 
-#  except: print''
 
 def printPostCont():
   try:
