@@ -149,15 +149,15 @@ def motif():
           L.append(info.split('|')[:2])
   notif.close()
   f2=readCSV("../files/uploaded.txt")
-    for fil in L:
-      for line in f2:
-        if fil[0]==line[0] and fil[1]==line[1]:
-          f2.remove(line)
-          break
-    File=open("../files/uploaded.txt","w")
+  for fil in L:
     for line in f2:
-        File.write("|".join(line)+"\n")
-    File.close()
+      if fil[0]==line[0] and fil[1]==line[1]:
+        f2.remove(line)
+        break
+  File=open("../files/uploaded.txt","w")
+  for line in f2:
+      File.write("|".join(line)+"\n")
+  File.close()
 
 
 print makePage()
