@@ -146,15 +146,18 @@ def motif():
             info=checkpoint[:index][::-1]
           else: info=checkpoint[::-1]
           notif.write(info+'\n')
-          L.append(info.split('|')[1])
+          L.append(info.split('|')[:2])
   notif.close()
   f2=readCSV("../files/uploaded.txt")
-  for line in f2:
-    if line[1] in L:
-      f2.remove(line)
-  File=open("../files/uploaded.txt","w")
-  for line in f2:
-    File.write("|".join(line)+"\n")
-  File.close()
+    for fil in L:
+      for line in f2:
+        if fil[0]==line[0] and fil[1]==line[1]:
+          f2.remove(line)
+          break
+    File=open("../files/uploaded.txt","w")
+    for line in f2:
+        File.write("|".join(line)+"\n")
+    File.close()
+
 
 print makePage()
