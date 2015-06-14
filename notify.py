@@ -77,10 +77,8 @@ def makePage():
                            </ul></p>
             </div>
 '''
-            if len(str(notify()))!=0:
-              retHTML+='<div id="par">'
-              retHTML+=str(notify())
-              retHTML+='</div>'
+            if len(notify())!=0:
+              retHTML+='<div id="par">%s</div>'%(notify())
               retHTML+=bottomHtml
               return retHTML
             else:
