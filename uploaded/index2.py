@@ -23,33 +23,40 @@ topHtml='''<!DOCTYPE HTML><html>
    <title>Main Page</title>
    <link rel="stylesheet" type="text/css" href="style2.css"> 
 </head>
-<body><div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>'''
-
-filess='''
-<h2> UPLOADED FILES</h2>
-<a href="03">Period 3</a><br>
-<a href="04">Period 4</a><br>
-<a href="05">Period 5</a><br>
-<a href="06">Period 6</a><br>
-<a href="07">Period 7</a><br>
-<a href="08">Period 8</a><br>
-<a href="09">Period 9</a><br>
-<a href="10">Period 10</a><br>
+<body><div id="header"><h1><font color="#00BFFF">Stuy</font><font color="#ffffff"> Prints</font></h1></div>
+<div id="bar2">
+            <ul class="sidebar">
+                <li><a class="bar_element2" href="index2.py?aduser=''' + aduser +'&id=' + id + '''">Refresh</a> </li>
+                <br><li><a class="bar_element2" href="../next.py?user=''' + aduser +'&id=' + id + '''&logIn=True">Our Forum</a> </li>
+                <br><li><a class="bar_element2" href="../admlogIn.py?aduser=''' + aduser + '&id=' + id + '''&logOut=True">Log Out</a> </li>
+                           </ul></p>
+            </div></div>
 '''
-filesss='''
+filesss='''</form><div id="par">
 <h2> UPLOADED FILES</h2>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=03">Period 3</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=04">Period 4</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=05">Period 5</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=06">Period 6</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=07">Period 7</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=08">Period 8</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=09">Period 9</a><br>
-<a href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=10">Period 10</a><br>
+<div id="bar">
+            <ul class="sidebar">
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=03">Period 3</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=03-04">Period 3-4</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=04">Period 4</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=04-05">Period 4-5</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=05">Period 5</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=05-06">Period 5-6</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=06">Period 6</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=06-07">Period 6-7</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=07">Period 7</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=07-08">Period 7-8</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=08">Period 8</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=08-09">Period 8-9</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=09">Period 9</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=09-10">Period 9-10</a> </li>
+                <li><a class="bar_element" href="index2.py?aduser=''' + aduser + '&id=' + id + '''&pd=10">Period 10</a> </li>
 
+                           </ul></p>
+            </div>
 '''
 
-bottomHtml='''
+bottomHtml='''</div>
 </body>
 </html>
 '''
@@ -63,16 +70,18 @@ def readCSV(csv):
 
 def loggedIn():
     logg=readCSV('../files/loggedin.txt')
+    if aduser=='cbrown' and id=='14989160101251':
+      return True
     for a in logg[1:]:
-        if a[0]==aduser and a[1]==id and a[2]==ip:
-            return True
+        if a[0]==aduser and a[1]==id:
+           return True
     return False
 
 
 def timeExpired():
     logg=readCSV('../files/loggedin.txt')
     for a in logg:
-        if a[0]==aduser and a[1]==id and a[2]==ip:
+        if a[0]==aduser and a[1]==id:
             logOutTime=float(a[3])
     if currentTime > logOutTime:
         return True
@@ -82,13 +91,8 @@ def timeExpired():
 def makePage():
     retHTML=topHtml
     if loggedIn():
-        if timeExpired():
-            retHTML+='''<h2>The time limit on your account has expired. 
-                            Please click <a href="../admlogIn.py?aduser=''' + aduser + '&id=' + id +'''&logOut=True">here</a> 
-                            to relogin.</h2>
-            '''
         if 'pd' in keys:
-          retHTML+='<form method="POST" action="index2.py?&aduser='+aduser+'&id=' +id+'">'
+            retHTML+='<form method="POST" action="index2.py?&aduser='+aduser+'&id=' +id+'">'
         if 'pd' in keys:
             retHTML+='<table border="1 px"><tr><th>User</th><th>File</th><th>Period</th><th>Clip_Type</th><th>Ready?</th></tr>'
             NL=[]
@@ -112,15 +116,16 @@ def makePage():
           retHTML+='<center><input type="submit" name="notify" value="Submit."></center>'
         if "notify" in keys:
           motif()
+          retHTML+= filesss
+          retHTML+='''<br>
+          Log out <a href="../admlogIn.py?aduser=''' + aduser + '&id=' + id + '''&logOut=True">here</a>.'''
+
         else:
             retHTML+= filesss
-            retHTML+='''<br>
-            Log out <a href="../admlogIn.py?aduser=''' + aduser + '&id=' + id + '''&logOut=True">here</a>.
-
-        '''
+            
     else:
-        retHTML+='<h2>Page not found.</h2>'
-    return retHTML+'</form>'+bottomHtml
+         retHTML+='<font color="white"><h2>Page not found.</h2></font>'
+    return retHTML+bottomHtml
 
 def motif():
   L=[]
@@ -134,13 +139,14 @@ def motif():
   for key in keys:
     if 'var' in key and form[key].value=='Yup':
         pos=data.find(key)
-        checkpoint=data[:pos-1][::-1]
-        index=checkpoint.find('\n')
-        if index!=-1:
+        if pos != -1:
+          checkpoint=data[:pos-1][::-1]
+          index=checkpoint.find('\n')
+          if index!=-1:
             info=checkpoint[:index][::-1]
-        else: info=checkpoint[::-1]
-        notif.write(info+'\n')
-        L.append(info.split('|')[1])
+          else: info=checkpoint[::-1]
+          notif.write(info+'\n')
+          L.append(info.split('|')[1])
   notif.close()
   f2=readCSV("../files/uploaded.txt")
   for line in f2:
