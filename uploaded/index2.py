@@ -154,7 +154,7 @@ def motif():
       if fil[0]==line[0] and fil[1]==line[1]:
         f2.remove(line)
         break
-  File=open("../files/uploaded.txt","w")
+  File=open("../files/uploaded.txt","a")
   for line in f2:
       File.write("|".join(line)+"\n")
   File.close()
