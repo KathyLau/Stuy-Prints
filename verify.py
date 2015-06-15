@@ -50,7 +50,13 @@ def match():
    f=readCSV('files/pending.txt')
    for w in f:
      if user==w[0] and id==w[2]:
-       print "Success"
+       print'''<center><h2>Success. </h2> 
+<div id="par2"> Before you start using the site:<b> <center>General Rules & Guidelines</center></b>
+<UL> Please note: Unacceptable posts/comments/uploads will result in major consequences. We are not responsible for your actions</LI>
+<LI> No Impersonation (trying to be someone else) This isn't allowed and you will be banned without prior notice. </LI>
+<LI>Please keep spam to a minimum.</LI></UL> <br>We thank your for your cooperation.    
+</UL>
+ <br><br>Log on <a href="logIn.py">here</a></center>'''
        a=open('files/users.txt','a')
        a.write(w[0] + '|' + w[1] +'\n')
        a.close()
@@ -59,10 +65,10 @@ def match():
            f.remove(line)
        for i,x in enumerate(f):
           f[i]='|'.join(x)
-       f='\n'.join
+       f='\n'.join(f)
        if len(f)==16:
           f+='\n'
-       File=open('file/pending.txt','w')
+       File=open('files/pending.txt','w')
        File.write(f)
        File.close()
        break
@@ -77,7 +83,3 @@ else:
   print printPage()
   
 print "</body></html>"
-
-
-
-
